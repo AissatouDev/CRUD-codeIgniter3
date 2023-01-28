@@ -2,20 +2,17 @@
 
 class Eleve_model extends CI_Model
 {
+
+
 	function insertStudent($data)
 	{
 		$this->db->insert('eleves', $data);
-		if ($this->db->affected_rows() >= 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->db->insert_id();
 	}
 
 	function getStudents()
 	{
-		$query = $this->db->get('eleves');
-		return $query->result_array();
+		return $this->db->get('eleves')->result();
 	}
 
 	function getStudent($id)

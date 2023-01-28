@@ -2,20 +2,16 @@
 
 class Pays_model extends CI_Model
 {
+ 
 	function insertPays($data)
 	{
 		$this->db->insert('pays', $data);
-		if ($this->db->affected_rows() >= 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return $this->db->insert_id();
 	}
 
 	function getAllPays()
 	{
-		$query = $this->db->get('pays');
-		return $query->result_array();
+		return $this->db->get('pays')->result();
 	}
 
 	function getOnePays($id)

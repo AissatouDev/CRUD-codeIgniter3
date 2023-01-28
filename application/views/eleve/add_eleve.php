@@ -8,11 +8,15 @@
 					<form method="post" action="<?= base_url() ?>eleve/add">
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Prénom</label>
-							<input type="text" class="form-control" name="prenom" id="exampleFormControlInput1">
+							<input type="text" class="form-control <?php echo form_error('prenom') ? 'is-invalid':'' ; ?> " name="prenom" 
+							id="exampleFormControlInput1">
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlInput2" class="form-label">Nom</label>
 							<input type="text" name="nom" class="form-control" id="exampleFormControlInput2">
+							<div class="invalid-feedback">
+                            	<?php echo form_error('prenom'); ?>
+                        	</div>
 						</div>
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Sexe</label>
@@ -25,6 +29,14 @@
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Date naissance</label>
 							<input name="date_naiss" type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+						</div>
+						<div class="mb-3">
+							<label>Pays</label>
+							<select  class="form-select" name="pays_id">
+								<?php foreach ($pays as $p): ?>
+								<option value="<?php echo $p->id; ?>"><?php echo $p->libelle; ?></option>
+								<?php endforeach; ?>
+							</select>
 						</div>
 						<button type="submit" class="btn btn-primary">Créer</button>
 					</form>

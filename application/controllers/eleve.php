@@ -6,6 +6,7 @@ class Eleve extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Eleve_model');
+		$this->load->model('Pays_model');
 	}
 
 	function add()
@@ -16,11 +17,13 @@ class Eleve extends CI_Controller
 			$nom = $this->input->post('nom');
 			$sexe = $this->input->post('sexe');
 			$date_naiss = $this->input->post('date_naiss');
+			$pays_id = $this->input->post('pays_id');
 			$data = array(
 				'prenom'=>$prenom,
 				'nom'=>$nom,
 				'sexe'=>$sexe,
-				'date_naiss'=>$date_naiss
+				'date_naiss'=>$date_naiss,
+				'pays_id'=>$pays_id
 			);
 			$status = $this->Eleve_model->insertStudent($data);
 			if ($status == true) {
@@ -32,14 +35,15 @@ class Eleve extends CI_Controller
 			}
 			
 		}else{
-			$this->load->view('eleve/add_eleve');
+			$data['pays'] = $this->Pays_model->getAllPays();
+			$this->load->view('eleve/add_eleve', $data);
 		}
 		
 	}
 
 	function index()
 	{
-		$data['eleves'] = $this->Eleve_model->getStudents();
+		$data = array("data"=>$this->Eleve_model->getStudents());
 		$this->load->view('eleve/index', $data);
 	}
 
@@ -52,11 +56,13 @@ class Eleve extends CI_Controller
 			$nom = $this->input->post('nom');
 			$sexe = $this->input->post('sexe');
 			$date_naiss = $this->input->post('date_naiss');
+			$pays_id = $this->input->post('pays_id');
 			$data = array(
 				'prenom'=>$prenom,
 				'nom'=>$nom,
 				'sexe'=>$sexe,
-				'date_naiss'=>$date_naiss
+				'date_naiss'=>$date_naiss,
+				'pays_id'=>$pays_id
 			);
 			$status = $this->Eleve_model->updateStudent($data, $id);
             if ($status == true) {
@@ -67,7 +73,7 @@ class Eleve extends CI_Controller
                 $this->load->view('eleve/edit_eleve');
             }
         }
-
+		$data['pays'] = $this->Pays_model->getAllPays();
         $this->load->view('eleve/edit_eleve',$data);
     }
 

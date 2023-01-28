@@ -22,16 +22,16 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach($pays as $row) { ?> 
+							<?php $i=1; foreach($data as $key => $value) :?> 
 							<tr>
-								<td><?=$i++?></td>
-								<td><?=$row['libelle']?></td>
+								<td><?=$i++;?></td>
+								<td><?=$value->libelle;?></td>
 								<td>
-									<a href="<?=base_url()?>pays/edit/<?=$row['id']?>" class="btn btn-sm btn-primary">Edit</a>
-									<a href="<?=base_url()?>pays/delete/<?=$row['id']?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer ce pays ?')" class="btn btn-sm btn-danger">Delete</a>
+									<a href="<?=base_url()?>pays/edit/<?=$value->id;?>" class="btn btn-sm btn-primary">Edit</a>
+									<a href="<?=base_url()?>pays/delete/<?=$value->id;?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer ce pays ?')" class="btn btn-sm btn-danger">Delete</a>
 								</td>
 							</tr>
-							<?php } ?>
+							<?php endforeach; ?>
 						</tbody>
                 	</table>
 					<?php

@@ -10,7 +10,7 @@ class Pays extends CI_Controller
 
 	function index()
 	{
-		$data['pays'] = $this->Pays_model->getAllPays();
+		$data = array("data"=>$this->Pays_model->getAllPays());
 		$this->load->view('pays/index', $data);
 	}
 

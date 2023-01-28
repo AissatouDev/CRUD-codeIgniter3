@@ -21,23 +21,25 @@
 								<th>Nom</th>
 								<th>Sexe</th>
 								<th>Date Naissance</th>
+								<th>Pays</th>
 								<th>Options</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach($eleves as $row) { ?> 
+							<?php $i=1; foreach($data as $key => $value) :?> 
 							<tr>
-								<td><?=$i++?></td>
-								<td><?=$row['prenom']?></td>
-								<td><?=$row['nom']?></td>
-								<td><?=$row['sexe']?></td>
-								<td><?=$row['date_naiss']?></td>
+								<td><?=$i++;?></td>
+								<td><?=$value->prenom;?></td>
+								<td><?=$value->nom;?></td>
+								<td><?=$value->sexe;?></td>
+								<td><?=$value->date_naiss;?></td>
+								<td><?=$value->pays_id;?></td>
 								<td>
-									<a href="<?=base_url()?>eleve/edit/<?=$row['id']?>" class="btn btn-sm btn-primary">Edit</a>
-									<a href="<?=base_url()?>eleve/delete/<?=$row['id']?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cet élève ?')" class="btn btn-sm btn-danger">Delete</a>
+									<a href="<?=base_url()?>eleve/edit/<?=$value->id;?>" class="btn btn-sm btn-primary">Edit</a>
+									<a href="<?=base_url()?>eleve/delete/<?=$value->id;?>" onclick="return confirm('êtes-vous sûr de vouloir supprimer cet élève ?')" class="btn btn-sm btn-danger">Delete</a>
 								</td>
 							</tr>
-							<?php } ?>
+							<?php endforeach; ?>
 						</tbody>
                 	</table>
 					<?php

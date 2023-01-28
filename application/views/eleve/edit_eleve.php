@@ -24,6 +24,14 @@
 							<label for="exampleFormControlInput1" class="form-label">Date naissance</label>
 							<input value="<?=$eleve->date_naiss?>" name="date_naiss" type="date" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
 						</div>
+						<div class="mb-3">
+							<label>Pays</label>
+							<select  class="form-select" name="pays_id">
+								<?php foreach ($pays as $p): ?>
+								<option value="<?php echo $p->id;?>"><?php echo $p->libelle; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
 						<button type="submit" class="btn btn-primary">Modifier</button>
 					</form>
 					<?php
