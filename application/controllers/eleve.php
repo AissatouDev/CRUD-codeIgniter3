@@ -1,11 +1,11 @@
 <?php
 
-class eleve extends CI_Controller
+class Eleve extends CI_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('eleve_model');
+		$this->load->model('Eleve_model');
 	}
 
 	function add()
@@ -22,7 +22,7 @@ class eleve extends CI_Controller
 				'sexe'=>$sexe,
 				'date_naiss'=>$date_naiss
 			);
-			$status = $this->eleve_model->insertStudent($data);
+			$status = $this->Eleve_model->insertStudent($data);
 			if ($status == true) {
 				$this->session->set_flashdata('success', 'Ajouté avec succès!');
 				redirect(base_url('eleve/index'));
@@ -39,13 +39,13 @@ class eleve extends CI_Controller
 
 	function index()
 	{
-		$data['eleves'] = $this->eleve_model->getStudents();
+		$data['eleves'] = $this->Eleve_model->getStudents();
 		$this->load->view('eleve/index', $data);
 	}
 
 	function edit($id)
     {
-        $data['eleve'] = $this->eleve_model->getStudent($id);
+        $data['eleve'] = $this->Eleve_model->getStudent($id);
         $data['id']=$id;
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $prenom = $this->input->post('prenom');
@@ -58,7 +58,7 @@ class eleve extends CI_Controller
 				'sexe'=>$sexe,
 				'date_naiss'=>$date_naiss
 			);
-			$status = $this->eleve_model->updateStudent($data, $id);
+			$status = $this->Eleve_model->updateStudent($data, $id);
             if ($status == true) {
                 $this->session->set_flashdata('success', 'Modification effectuée avec succès!');
                 redirect(base_url('eleve/index'));
@@ -75,7 +75,7 @@ class eleve extends CI_Controller
     {
         if(is_numeric($id))
         {
-            $status =$this->eleve_model->deleteStudent($id);
+            $status =$this->Eleve_model->deleteStudent($id);
             if ($status == true) {
                 $this->session->set_flashdata('deleted', 'Suppression effectuée avec succès!');
                 redirect(base_url('eleve/index/'));
