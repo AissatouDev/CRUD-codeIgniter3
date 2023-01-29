@@ -9,7 +9,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>CRUD Project with CodeIgniter</title>
+
+		<style>
+
+				.navItem{
+					cursor: pointer;
+					font-size: 20px;
+				}
+				.active-link{
+    			background-color: aqua;
+				}
+				
+		</style>
   </head>
+
   <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container-fluid">
@@ -18,14 +31,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav navItem me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="<?= base_url() ?>eleve/index">Elèves</a>
+          <a class="nav-link <?= (uri_string() == 'eleve/index') ? 'active-link' : '' ?>" href="<?= base_url() ?>eleve/index">Elèves</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url() ?>pays/index">Pays</a>
+          <a class="nav-link <?= (uri_string() == 'pays/index') ? 'active-link' : '' ?>" href="<?= base_url() ?>pays/index">Pays</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+

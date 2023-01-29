@@ -11,13 +11,22 @@ class Eleve extends CI_Controller
 
 	function add()
 	{
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-		{
-			$prenom = $this->input->post('prenom');
-			$nom = $this->input->post('nom');
-			$sexe = $this->input->post('sexe');
-			$date_naiss = $this->input->post('date_naiss');
-			$pays_id = $this->input->post('pays_id');
+		$prenom = $this->input->post('prenom');
+		$nom = $this->input->post('nom');
+		$sexe = $this->input->post('sexe');
+		$date_naiss = $this->input->post('date_naiss');
+		$pays_id = $this->input->post('pays_id');
+		$data['pays'] = $this->Pays_model->getAllPays();
+
+		$this->form_validation->set_rules('prenom', 'Prenom', 'required');
+		$this->form_validation->set_rules('nom', 'Nom', 'required');
+		$this->form_validation->set_rules('sexe', 'Sexe', 'required');
+		$this->form_validation->set_rules('date_naiss', 'Date naissance', 'required');
+		$this->form_validation->set_rules('pays_id', 'Pays_id', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('eleve/add_eleve', $data);
+		} else {
 			$data = array(
 				'prenom'=>$prenom,
 				'nom'=>$nom,
@@ -25,6 +34,7 @@ class Eleve extends CI_Controller
 				'date_naiss'=>$date_naiss,
 				'pays_id'=>$pays_id
 			);
+			
 			$status = $this->Eleve_model->insertStudent($data);
 			if ($status == true) {
 				$this->session->set_flashdata('success', 'Ajouté avec succès!');
@@ -33,14 +43,11 @@ class Eleve extends CI_Controller
 				$this->session->set_flashdata('error', 'Une erreur est survenue');
 				$this->load->view('eleve/add_eleve');
 			}
-			
-		}else{
-			$data['pays'] = $this->Pays_model->getAllPays();
-			$this->load->view('eleve/add_eleve', $data);
-		}
-		
+
+		} 		
 	}
 
+	
 	function index()
 	{
 		$data = array("data"=>$this->Eleve_model->getStudents());

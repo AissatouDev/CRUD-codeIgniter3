@@ -16,10 +16,13 @@ class Pays extends CI_Controller
 
 	function add()
 	{
+		$libelle = $this->input->post('libelle');
 
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-		{
-			$libelle = $this->input->post('libelle');
+		$this->form_validation->set_rules('libelle', 'Libelle', 'required');
+
+		if ($this->form_validation->run() == FALSE) {
+			$this->load->view('pays/add_pays');
+		} else {
 			$data = array(
 				'libelle'=>$libelle
 			);
@@ -31,9 +34,6 @@ class Pays extends CI_Controller
 				$this->session->set_flashdata('error', 'Une erreur est survenue');
 				$this->load->view('pays/add_pays');
 			}
-			
-		}else{
-			$this->load->view('pays/add_pays');
 		}
 	}
 

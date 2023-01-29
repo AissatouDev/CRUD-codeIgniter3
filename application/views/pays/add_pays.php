@@ -8,7 +8,9 @@
 					<form method="post" action="<?= base_url() ?>pays/add">
 						<div class="mb-3">
 							<label for="exampleFormControlInput1" class="form-label">Libelle</label>
-							<input type="text" class="form-control" name="libelle" id="exampleFormControlInput1">
+							<input type="text" class="form-control <?php echo form_error('libelle') ? 'is-invalid':'' ; ?>" name="libelle" id="exampleFormControlInput1"
+							value="<?php echo set_value('libelle'); ?>">
+							<span class="text-danger"><?= form_error('libelle') ?></span>
 						</div>
 						<button type="submit" class="btn btn-primary">Créer</button>
 					</form>
